@@ -6,15 +6,15 @@ a `demo.sh`, and a pinned `requirements.txt`.
 
 | Task | Folder | What it is | Tests |
 |------|--------|------------|-------|
-| 1 | [`task1-mcp-server/`](task1-mcp-server/) | stdio MCP server with two tools, Pydantic validation, JSON-RPC error codes, stdout guarded for pure JSON-RPC | 27 |
-| 2 | [`task2-mcp-gateway/`](task2-mcp-gateway/) | HTTP/JSON-RPC reverse proxy: Bearer-token roles, `tools/call` authorization, `-32001` interception, byte-for-byte forwarding | 42 |
-| 3 | [`task3-streaming-guardrail/`](task3-streaming-guardrail/) | LLM gateway that redacts emails / SSNs / cards from an SSE token stream with bounded holdback (no buffering, ~1 token added latency) | 113 |
-| 4 | [`task4-rate-limit-router/`](task4-rate-limit-router/) | SQLite sliding-window token limiter (reserve → settle) + primary/secondary failover on 429 / 3 s timeout / 5xx, standardised errors | 34 |
+| 1 | [`mcp-customer-server/`](mcp-customer-server/) | stdio MCP server with two tools, Pydantic validation, JSON-RPC error codes, stdout guarded for pure JSON-RPC | 27 |
+| 2 | [`mcp-gateway/`](mcp-gateway/) | HTTP/JSON-RPC reverse proxy: Bearer-token roles, `tools/call` authorization, `-32001` interception, byte-for-byte forwarding | 42 |
+| 3 | [`llm-guardrail/`](llm-guardrail/) | LLM gateway that redacts emails / SSNs / cards from an SSE token stream with bounded holdback (no buffering, ~1 token added latency) | 113 |
+| 4 | [`llm-router/`](llm-router/) | SQLite sliding-window token limiter (reserve → settle) + primary/secondary failover on 429 / 3 s timeout / 5xx, standardised errors | 34 |
 
 ## Running any task
 
 ```bash
-cd task3-streaming-guardrail          # or any other task folder
+cd llm-guardrail          # or any other task folder
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 python -m pytest -v                   # the tests
