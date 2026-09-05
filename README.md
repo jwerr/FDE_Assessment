@@ -14,11 +14,15 @@ a `demo.sh`, and a pinned `requirements.txt`.
 ## Running any task
 
 ```bash
+<<<<<<< HEAD
 cd llm-guardrail          # or any other task folder
+=======
+cd llm-guardrail          
+>>>>>>> c05b714 (Readme.md file changes)
 python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-python -m pytest -v                   # the tests
-./demo.sh                             # boots the servers and walks the scenarios
+python -m pytest -v                   
+./demo.sh                             
 ```
 
 Requires Python 3.10+. All 216 tests run in about 25 seconds total; every
@@ -52,3 +56,15 @@ suite boots real servers on ephemeral ports rather than mocking HTTP.
 * T4 `router.py::_try` — a single `wait_for` deadline that cancels the
   attempt, so a late primary can't race the secondary;
   `ratelimiter.py::reserve` — `BEGIN IMMEDIATE` check-and-insert.
+
+  ## Quick start: run everything
+
+```bash
+./run_all.sh            # per-task venv + pip install + all 216 tests, with a PASS/FAIL summary
+./run_all.sh --demo     # …then each task's demo.sh (~30 s; Task 4 waits a real 3 s timeout)
+./run_all.sh --clean    # remove venvs, caches, logs and SQLite files
+```
+
+Requires Python 3.10+ on `PATH` as `python3` (override with `PYTHON=python3.12 ./run_all.sh`).
+Each task gets its own `.venv` because they pin different dependencies; the script is
+idempotent, so re-running only re-installs what changed.
